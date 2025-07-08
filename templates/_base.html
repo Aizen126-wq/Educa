@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+{% load static %}
+
 <html lang="en">
 {% block head %}
 
@@ -6,12 +8,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 {% endblock %}
 
 <body>
     {% block header %}
     {% if user.is_authenticated %}
+    <header>
     <h1>Hello!</h1>
     <form action="{% url 'logout'%}" method="post">
         {% csrf_token %}
@@ -27,6 +31,7 @@
     {% endif %}
     {% if user.is_authenticated %}
     {% endif %}
+    </header>
     {% endblock %}
 
     {% block main %}
@@ -36,6 +41,9 @@
 
     {% block footer %}
 
+    {% endblock %}
+    {% block scripts %}
+    <script src="{% static 'js/index.js' %}"></script>
     {% endblock %}
 </body>
 
