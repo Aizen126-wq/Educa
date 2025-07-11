@@ -1,8 +1,10 @@
-
-
+from environs import Env
 from pathlib import Path
 import os
 
+
+env = Env()
+env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,12 +13,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-11po7p1!f-d8!#icn!(*=)_ksvvda3)_y0#xoshham2a@u9iwt'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool('DJANGO_DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -69,12 +71,12 @@ WSGI_APPLICATION = 'educa.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'aizen',
-        'HOST': 'db',
-        'PASSWORD': 'aizen123',
-        'PORT': '5432',
+        'ENGINE' : env('DJANGO_DB_ENGINE'),
+        'NAME' : env('DJANGO_DB_NAME'),
+        'USER' : env('DJANGO_DB_USER'),
+        'HOST' : env('DJANGO_DB_HOST'),
+        'PASSWORD' : env('DJANGO_DB_PASSWORD'),
+        'PORT' : env('DJANGO_DB_PORT'),
     }
 }
 

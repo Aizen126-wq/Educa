@@ -53,3 +53,23 @@ class SignUpTests(TestCase):
     def test_signup_view(self):
         view = resolve(reverse('signup'))
         self.assertEqual(view.func.__name__, SignUpView.as_view().__name__)
+        
+
+class ProfilePageTests(SimpleTestCase):
+    def setUp(self):
+        url = reverse('profile')
+        self.response = self.client.get(url)
+
+    def test_profile_page_status_code(self):
+        self.assertEqual(self.response.status_code, 200)
+
+    def test_profile_page_template(self):
+        self.assertTemplateUsed(self.response, 'registration/profile.html')
+        self.assertContains(self.response, 'Profile')
+
+    def test_profile_name(self):
+        self.assertEqual(self.response_code, 200)
+
+    def test_profile_page_view(self):
+        view = reverse('profile')
+        self.assertEqual(view.func.__name__, ProfileView.as_view().__name__)

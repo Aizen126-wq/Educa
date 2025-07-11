@@ -1,10 +1,69 @@
 {% extends "_base.html" %}
+{% load static %}
 
 {% block main %}
-<h2>Cadastro</h2>
-<form method="post">
+
+    <div class="page-title" data-aos="fade">
+        <div class="heading">
+            <div class="container">
+                <div class="row d-flex justify-content-center text-center">
+                    <div class="col-lg-8">
+                        <h1>Cadastro<br></h1>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+<section id="contact" class="contact">
+      <div class="container" data-aos="fade-up">
+        <div class="row mt-5">
+          <div class="col-lg-8 mt-5 mt-lg-0">
+            <form action="" method="post" role="form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Cadastrar</button>
 </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <script>
+    let labels = document.querySelectorAll('label')
+    labels.forEach((label) => {
+      label.style.display = 'none'
+    })
+
+    let inputs = document.querySelectorAll('input')
+    inputs.forEach((input) => {
+      input.classList.add('form-control')
+      if (input.name == 'username') {
+        input.setAttribute('placeholder', 'Username')
+      }
+      if (input.name == 'email') {
+        input.setAttribute('placeholder', 'Email')
+      }
+    })
+    if (document.querySelector('input[name="password1"]')) {
+      let password1 = document.querySelector('input[name="password1"]')
+      password1.setAttribute('placeholder', 'Password')
+      password1.classList.add('form-control')
+    }
+    if (document.querySelector('input[name="password2"]')) {
+      let password2 = document.querySelector('input[name="password2"]')
+      password2.setAttribute('placeholder', 'Confirm Password')
+      password2.classList.add('form-control')
+    }
+    
+    let form_elements = document.querySelectorAll('form > *')
+    form_elements.forEach((form_element) => {
+      form_element.setAttribute('style', 'margin-bottom:15px')
+    })
+    
+    let buttom_submit = document.querySelector('button')
+    buttom_submit.setAttribute('style', 'border:none; margin-left:0px;')
+    buttom_submit.classList.add('get-started-btn')
+  </script>
+
 {% endblock %}
