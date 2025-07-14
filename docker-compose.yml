@@ -8,14 +8,21 @@ services:
     ports:
       - 8000:8000
     environment:
-      - DJANGO_SECRET_KEY=django-insecure-11po7p1!f-d8!#icn!(*=)_ksvvda3)_y0#xoshham2a@u9iwt
-      - DJANGO_DEBUG=True
+      - DJANGO_SECRET_KEY=_iqgxInoBbA9oWCHrEUzbnIJOFWGpC3Ehr-m3d3Iit_hGmQk2h0
+      - DJANGO_DEBUG=False
       - DJANGO_DB_ENGINE=django.db.backends.postgresql
       - DJANGO_DB_NAME=postgres
       - DJANGO_DB_USER=aizen
       - DJANGO_DB_HOST=db
       - DJANGO_DB_PASSWORD=aizen123
       - DJANGO_DB_PORT=5432
+      - DJANGO_SECURE_SSL_REDIRECT=True
+      - DJANGO_SECURE_HSTS_SECONDS=2592000
+      - DJANGO_SECURE_HSTS_INCLUDE_SUBDOMAINS=True
+      - DJANGO_SECURE_HSTS_PRELOAD=True
+      - DJANGO_SESSION_COOKIE_SECURE=True
+      - DJANGO_CSRF_COOKIE_SECURE=True
+      - DJANGO_DB_URL=postgresql://educa_db_ar1o_user:emraMncKmW2IaFKwIrnoWBD4IddlR5Lz@dpg-d1qnefodl3ps738a9ak0-a/educa_db_ar1o
 
     depends_on:
       - db
