@@ -213,10 +213,34 @@ h6 {
   margin-left: 5px;
 }
 
+.file-upload {
+        display: none;
+        
+    }
+#none {
+        font-size: 0;
+    }
+    #id_profile_image, #none > a {
+        opacity: 0;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0,0,0,0);
+        pointer-events: none;
+    }
+
 .navbar a:hover,
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
+  color: #5fcf80;
+}
+
+#no-color{
+  color: rgba(20, 19, 19, 0.726);
+}
+#no-color :hover{
   color: #5fcf80;
 }
 
@@ -252,7 +276,6 @@ h6 {
 }
 
 .navbar .dropdown ul a:hover,
-.navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
   color: #5fcf80;
 }
@@ -352,7 +375,6 @@ h6 {
 }
 
 .navbar-mobile a:hover,
-.navbar-mobile .active,
 .navbar-mobile li:hover>a {
   color: #5fcf80;
 }
@@ -387,7 +409,6 @@ h6 {
 }
 
 .navbar-mobile .dropdown ul a:hover,
-.navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
   color: #5fcf80;
 }

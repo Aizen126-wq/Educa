@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Course
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 class ListCourseView(ListView):
     model = Course
@@ -14,3 +15,14 @@ class CourseDetailView(DetailView):
     context_object_name = 'course'
 
 
+class CreateCourseView( LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    model = Course
+    template_name = 'create_course.html'
+    fields = ['name',
+             'trainer',
+             'sits',
+             'price',
+             'resume',
+             'cover']
+
+permission_required = ('is_superuser')

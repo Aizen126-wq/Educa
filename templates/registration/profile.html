@@ -1,73 +1,91 @@
+<!-- templates/registration/profile.html -->
 {% extends '../_base.html' %}
+{% load static %}  {# carregando a tag static para usar {% static %} #}
+
+
 {% block header %}
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-      <h1 class="logo me-auto"><a href="{% url 'home' %}">Educa</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+  <div class="container d-flex align-items-center">
+    <h1 class="logo me-auto"><a href="{% url 'home' %}">Educa</a></h1>
 
-      <nav id="navbar" class="navbar order-last order-lg-0"></nav>
-      <!-- .navbar -->
+    <nav id="navbar" class="navbar order-last order-lg-0">
+      <ul>
+        <li class="dropdown">
+          <a id="no-color" href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
+          <ul class="ancores">
+            <li>
+              <a href="{% url 'password_change' %}">Mudar Senha</a>
+            </li>
+            <li>
+              <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" style="background:none; border:none; color:inherit; cursor:pointer;">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+{% endblock  %}
 
-      <form action="{% url 'logout' %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-      </form>
-    </div>
-  </header>
-  <!-- End Header -->
-{% endblock %}
 {% block main %}
-  <main id="main">
-    <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs" data-aos="fade-in">
-      <div class="container">
-        <h2>Profile</h2>
-        <p>Est dolorum ut non facere possimus quibusdam eligendi voluptatem. Quia id aut similique quia voluptas sit quaerat debitis. Rerum omnis ipsam aperiam consequatur laboriosam nemo harum praesentium.</p>
-      </div>
+<main id="main">
+  <div class="breadcrumbs" data-aos="fade-in">
+    <div class="container">
+      <h2>Profile</h2>
+      <p>Edite sua imagem de perfil abaixo. Clique na foto para alterar.</p>
     </div>
-    <!-- End Breadcrumbs -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
-        <div class="row mt-5">
-          <div class="col-lg-8 mt-5 mt-lg-0">
-            <form action="" method="post" role="form" enctype="multipart/form-data">
-              {% csrf_token %}
-              <div class="col-md-6 form-group">{{ form.username }}</div>
-              <div class="col-md-6 form-group">{{ form.email }}</div>
-              <div class="col-md-6 form-group">{{ form.profile_image }}</div>
+  </div>
 
-              <div class="|">
-                <button type="submit">Update</button>
-              </div>
-            </form>
-          </div>
+  <section id="contact" class="contact">
+    <div class="container" data-aos="fade-up">
+      <div class="row mt-5">
+        <div class="col-lg-8 mt-5 mt-lg-0">
+
+          <!-- Adicionado id="profile-form" para o JS selecionar o form -->
+          <form id="profile-form" action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div id="none" class="form-group ">
+              <label for="{{ form.profile_image.id_for_label }}" style="cursor: pointer; display: inline-block;">
+                {% if request.user.profile_image %}
+                  <img src="{{ request.user.profile_image.url }}" alt="Profile Image"
+                    style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%; display: block; margin: 0 auto 10px;" />
+                {% else %}
+                  <img src="{% static 'default_profile.png' %}" alt="Default Profile Image"
+                    style="width: 130px; height: 130px; object-fit: cover; border-radius: 50%; display: block; margin: 0 auto 10px;" />
+                {% endif %}
+                
+              </label>
+
+              {{ form.profile_image }}
+            </div>
+            <p>{{ request.user.username }}</p>
+
+            <div >
+              <button class="" type="submit">
+                Atualizar Foto
+              </button>
+            </div>
+          </form>
+
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <!-- JS para estilizar só os filhos do form -->
   <script>
-    let inputs = document.querySelectorAll('input')
-    inputs.forEach((input) => {
-      input.classList.add('form-control')
-      if (input.name == 'username') {
-        input.setAttribute('placeholder', 'Your username')
-      }
-      if (input.name == 'email') {
-        input.setAttribute('placeholder', 'Your Email')
-      }
-    })
-    
-    let form_elements = document.querySelectorAll('form > *')
-    form_elements.forEach((form_element) => {
-      form_element.setAttribute('style', 'margin-bottom:15px')
-    })
-    
-    let submit_buttons = document.querySelectorAll('button')
-    submit_buttons.forEach((submit_button) => {
-      submit_button.setAttribute('style', 'border:none; margin-left:0px;')
-      submit_button.classList.add('get-started-btn')
-    })
+let ancores = document.querySelectorAll('ancores');
+ancores.forEach((ancore) => { 
+    ancore.className.ancores('style', 'text-align: center;');
+});
+ancores.getAttribute('style', 'text-align: leght ;');
+
   </script>
+
+</main>
 {% endblock %}

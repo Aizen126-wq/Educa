@@ -1,8 +1,16 @@
+# accounts/models.py
+
 from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 from django.db import models
 
 class CustomUserModel(AbstractUser):
-    profile_image = models.FileField(upload_to='accounts/profile/img/', default='trainer-2.jpg')
+    profile_image = models.FileField(
+        upload_to='accounts/profile/img/', 
+        default='trainer-2.jpg',
+        blank=True,
+        null=True
+    )
+
     def get_absolute_url(self):
         return reverse("login")

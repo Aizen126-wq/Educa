@@ -33,7 +33,8 @@ INSTALLED_APPS = [
 
     'accounts',
     'pages',
-    'courses'
+    'courses',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

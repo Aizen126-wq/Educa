@@ -1,8 +1,10 @@
-from django.urls import path
-from .views import SigupView, ProfileView
+# accounts/urls.py
 
+from django.urls import path
+from .views import SignupView, ProfileView, CustomPasswordChangeView
 
 urlpatterns = [
-    path('signup/', SigupView.as_view(), name='signup'),
-    path('profile/<int:pk>/', ProfileView.as_view(), name='profile'),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('profile/', ProfileView.as_view(), name='profile'),
+    path('password_change/', CustomPasswordChangeView.as_view(), name='password_change'),
 ]
