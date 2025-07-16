@@ -2,7 +2,7 @@ FROM python:3.10-slim
 
 WORKDIR /educa
 
-COPY requirements.txt .
+COPY /requirements.txt .
 
 RUN pip install -r requirements.txt
 
@@ -12,6 +12,5 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PIP_DISABLE_PIP_VERSION_CHECK=1
 
-EXPOSE 8000
 
 CMD ["sh", "-c", "python manage.py makemigrations && python manage.py migrate && gunicorn --bind 0.0.0.0:8000 educa.wsgi:application"]
